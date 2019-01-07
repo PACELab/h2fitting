@@ -14,14 +14,12 @@ function lsq = calc_lsq_err(para, k,unqs, cdf_vals, dist)
 %lsq: least square error between the cdf of hyperexponential
 %distribution and the cdf of databew
 
-     %cdf_th = cdf_all(para, k, unqs, dist) % original Line
-%cdf_th = prob(1).*cdf('Exponential', x, 1/lmbd(1)) + prob(2).*cdf('Exponential', x, 1/lmbd(2));
-%cdf_th = para(1).*cdf('Exponential', unqs, 1/para(2)) + (1-para(1)).*cdf('Exponential', unqs, 1/para(3));%calc_hyp_cdf(unqs, prob, lmbd);
-    if k>1   
-        p=para(1:k); % comment this out for original
-        cdf_th=emdistcdf(unqs,1./para(k+1:end),p); % comment this out for original
-    else
-        cdf_th=cdf('Exponential', unqs, 1/para(1));
-    end
+     cdf_th = cdf_all(para, k, unqs, dist); % original Line
+%     if k>1   
+%         p=para(1:k); % comment this out for original
+%         cdf_th=emdistcdf(unqs,1./para(k+1:end),p); % comment this out for original
+%     else
+%         cdf_th=cdf('Exponential', unqs, 1/para(1));
+%     end
     lsq = sum((cdf_th - cdf_vals).^2);
 end
