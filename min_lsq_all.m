@@ -7,7 +7,7 @@ function [para, jsd, ks_stat, r_sq] = min_lsq_all(fp, dist, k, x0, lb, ub, A, b,
 %     exit(code)
     %cdfplot(data1)            
     f = @(x)calc_lsq_err(x, k, unqs, cdf_vals, dist);                
-    
+
     problem = createOptimProblem('fmincon', 'objective', f,'x0', x0,'Aineq',A, 'bineq', b, 'Aeq', Aeq, 'beq', beq, 'nonlcon', nonlcon, 'lb', lb, 'ub', ub);
     gs = GlobalSearch('Display', 'iter');    
     [para, fval] = run(gs, problem);    

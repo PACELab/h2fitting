@@ -7,7 +7,13 @@ function cdf_th = cdf_all(para, k, unqs, dist)
 %dist: name of the distribution
 %returns: cdf of the specified distribution
     if(strcmp(dist, 'hyp'))
-        cdf_th = para(1).*cdf('Exponential', unqs, 1/para(2)) + (1-para(1)).*cdf('Exponential', unqs, 1/para(3));%calc_hyp_cdf(unqs, prob, lmbd);
+        if k>1
+            p=para(1:k); % comment this out for original
+            cdf_th=emdistcdf(unqs,1./para(k+1:end),p); % comment this out for original
+        else
+            cdf_th=cdf('Exponential', unqs, 1/para(1));
+        end
+%        cdf_th = para(1).*cdf('Exponential', unqs, 1/para(2)) + (1-para(1)).*cdf('Exponential', unqs, 1/para(3));%calc_hyp_cdf(unqs, prob, lmbd);
     elseif(strcmp(dist, 'Normal'))
         cdf_th = normcdf(unqs, para(1), para(2));        
     elseif(strcmp(dist, 'Weibull'))
