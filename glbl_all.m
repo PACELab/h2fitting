@@ -25,7 +25,7 @@ function glbl_all()
 %         fclose('all');
 %     end
 
-     [fnl_para, fnl_jsd, fnl_ks, fnl_rsq, times, rsquared] = min_hyp_K('fiu-iodedup-interarrival-times/sorted_home1_ext3_writes.txt', obj);
+     [fnl_para, fnl_jsd, fnl_ks, fnl_rsq] = min_hyp_K('fiu-iodedup-interarrival-times/sorted_home3_ext3_reads.txt', obj);
 end
 
 function [para, jsd, ks_stat, r_sq] = min_all(fp, dist, obj)
@@ -271,9 +271,9 @@ function [para, jsd, ks_stat, r_sq] = min_all(fp, dist, obj)
     
 end
 
-function [para, jsd, ks_stat, r_sq, times, rsquared] = min_hyp_K(fp, obj)
+function [para, jsd, ks_stat, r_sq] = min_hyp_K(fp, obj)
     if(strcmp(obj, 'lsq'))
-        [para, jsd, ks_stat, r_sq, times, rsquared] = min_lsq_Hyp(fp);
+        [para, jsd, ks_stat, r_sq] = min_lsq_Hyp(fp);
         para =[para(1);1-para(1);para(2);para(3)];
     elseif(strcmp(obj, 'jsd'))
         [para, jsd, ks_stat, r_sq] = min_jsd_hyp(fp);
@@ -281,7 +281,7 @@ function [para, jsd, ks_stat, r_sq, times, rsquared] = min_hyp_K(fp, obj)
     end
 end
 
-function [para, jsd, ks_stat, r_sq, times, rsquared] = min_lsq_Hyp(fp)    
+function [para, jsd, ks_stat, r_sq] = min_lsq_Hyp(fp)    
     data1 = load(fp);    
     data1 = sort(data1);
     times=ones(5,10);
@@ -390,6 +390,6 @@ function [para, jsd, ks_stat, r_sq] = min_jsd_hyp(fp)
             jsds(r,k)=jsd;
         end
     end
-    csvwrite('times_jsd_runs.csv',times);
-    csvwrite('jsds_runs.csv',jsds);
+    csvwrite('times_jsd_runs_home3reads.csv',times);
+    csvwrite('jsds_runs_homes3reads.csv',jsds);
 end
