@@ -1,15 +1,17 @@
 function glbl_all()
     % desc:
     %calculate the best fitting parameters with jsd, k-s stat and r^2 values using the value('lsq' or 'jsd') assigned to obj    
-    type='st';    %interarrival time(iat) service time(st)
+    type='iat';    %interarrival time(iat) service time(st)
     obj = 'lsq';
-    trace_name='Filebench';
+    trace_name='SO';
     %{'Normal', 'Weibull', 'Poisson', 'Beta', 'BirnbaumSaunders', 'Burr', 'Extreme Value', 'Gamma', 'Generalized Extreme Value', 'Generalized Pareto', 'HalfNormal', 'InverseGaussian', 'Logistic', 'LogLogistic', 'Lognormal', 'Nakagami', 'Rayleigh', 'Rician', 'Stable', 'tLocationScale', 'Binomial', 'Negative Binomial'}    
     %'I:\study\Graduate\Summer\TraceAnalysis\traces\MSNStorageCFS\IAT\file_names.txt'
     %'I:\study\Graduate\Summer\TraceAnalysis\traces\Nexus\Nexus5_Kernel_BIOTracer_traces\Trace_files\'
-    for dist = {'tLocationScale', 'Rician'}
-        path = 'I:\study\Graduate\Summer\TraceAnalysis\traces\MSNStorageC\';
-        fid = fopen('I:\study\Graduate\Summer\TraceAnalysis\traces\filebench\st\file_names.txt');
+    % 'Normal', 'Weibull', 'Poisson', 'Beta', 'BirnbaumSaunders', 'Burr', 'Extreme Value', 'Gamma', 'Generalized Extreme Value', ...
+    %        'Generalized Pareto', 'HalfNormal', 'InverseGaussian', 'Logistic', 'LogLogistic', 'Lognormal', 'Nakagami', 'Rayleigh',
+    for dist = { 'Exponential', 'hyp', 'tLocationScale', 'Rician'}
+        fn = '/users/Jasim9/working/file_names.txt';
+        fid = fopen(fn);
         ln = fgetl(fid);
         mat=[];
         while ischar(ln)
